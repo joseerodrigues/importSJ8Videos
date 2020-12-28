@@ -2,7 +2,12 @@ function copyFromDrive([string]$driveLetter, [string]$destDir)
 {
     $localVideoDir = $destDir + "\" + (Get-Date).ToString("dd-MM-yyyy - new")     
     $videoDir = $driveLetter + ":\DCIM\100MEDIA"
+    $goprovideoDir = $driveLetter + ":\DCIM\100GOPRO"
 
+    if (-Not (Test-Path -Path $videoDir -PathType Container)){
+        $videoDir = $goprovideoDir
+    }
+    
     if ( Test-Path -Path $videoDir -PathType Container ) { 
         "Found videos in " + $videoDir
 
